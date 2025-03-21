@@ -4,7 +4,7 @@ import Photo4 from "../../public/photo4.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 const AboutUs = () => {
   return (
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 mt-[4vw]">
         <div className="text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-4 font-roboto bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to Care4Pets</h2>
           <p className="text-xl text-gray-600 mb-8">
@@ -39,11 +39,10 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Why Choose Us */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-[10vw] mt-16">
           <div className="flex justify-center items-center">
             <div className="w-full h-[300px] md:h-[400px] bg-gray-200 rounded-xl shadow-lg relative">
-              {/* Placeholder for Image */}
+             
               <Image
                 src={Photo4}
                 alt="Pet Care"
@@ -66,7 +65,6 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Community Involvement */}
         <div className="mt-[8vw]">
           <div className="text-center">
             <h3 className="text-2xl font-semibold text-gray-800 mb-4 font-roboto">Giving Back to the Community</h3>
@@ -80,8 +78,6 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
-
-        {/* Call to Action */}
         <div className="mt-16 text-center">
           <h3 className="text-2xl font-semibold text-gray-800 mb-4 font-roboto">Visit Us Today!</h3>
           <p className="text-lg text-gray-600 mb-8">

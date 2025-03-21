@@ -24,7 +24,7 @@ const Navbar = () => {
         <Link href="/contact" className="nav-link text-[1.5rem] lg:text-[1rem]  xl:text-[1.3vw] font-roboto hover:text-gray-500">Contact Us</Link>
       </div>
       <div className="flex flex-row items-center justify-center xl:w-[20vw] gap-[2rem] xs:hidden xl:flex  lg:mr-[1vw] xl:ml-[4vw] ">
-        <button className="border-none outline-none rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-roboto text-[1.5rem] w-[7vw] h-[3rem] lg:text-[1rem] xl:text-[1.3vw] xl:h-[2.8vw] hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 transition-transform duration-300 hover:scale-105">Sign In</button>
+        <Link href="/signin"><button className="border-none outline-none rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-roboto text-[1.5rem] w-[7vw] h-[3rem] lg:text-[1rem] xl:text-[1.3vw] xl:h-[2.8vw] hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 transition-transform duration-300 hover:scale-105">Sign In</button></Link>
         <Link href="/signup" className="font-roboto text-[1.5rem] lg:text-[1rem] xl:w-[8vw] xl:text-[1.3vw] hover:text-gray-500 ">Sign Up</Link>
       </div>
       <div className="xs:flex justify-center items-center ml-auto text-[1.8rem] mr-[2rem] sm:text-[2.5rem] xl:hidden ">

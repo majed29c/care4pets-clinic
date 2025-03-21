@@ -83,7 +83,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-white/20 pt-8 text-center">
           <p className="text-gray-300 text-sm">
-            © 2023 PetCare Clinic. All rights reserved. 
+            © 2025 PetCare Clinic. All rights reserved. 
             <a href="#" className="hover:text-blue-400 ml-2">Terms of Service</a>
           </p>
         </div>
