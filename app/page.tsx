@@ -1,95 +1,29 @@
+import "tailwindcss/tailwind.css";
 import Image from "next/image";
-import styles from "./page.module.css";
-
+import petspic from "../public/photo2.jpg";
+import OpeningHours from "@/components/openhours/OpenHours";
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <>
+    <div className="flex flex-row w-full justify-center items-center mt-[8vw] px-[5vw]">
+      <div className="flex justify-center items-center basis-1/2" >
+      <h1 className="font-bold text-[4vw] bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-roboto"> Welcome to Care4Pets Clinic </h1>
+      </div>
+      <div className="flex basis-1/2 justify-center items-center">
+       <Image src={petspic} alt="pets image" className="rounded-xl"/>
+      </div>
     </div>
+    <div className="flex flex-col w-full justify-center items-center mt-[3vw] px-[5vw] pb-[8vw]">
+    <p className="mt-[6vw] text-[1.8vw] bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-roboto">
+  Your pet’s health and happiness are our top priorities.
+</p>
+
+     
+        <p className="mt-[2vw] text-[1.8vw] bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-roboto">   Book an appointment today and give your furry friends the care they deserve!
+        </p>
+       
+        </div>  
+        <OpeningHours />
+    </>
   );
 }
