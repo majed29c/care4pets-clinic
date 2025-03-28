@@ -38,9 +38,9 @@ export default function Signup() {
   }
 
   return (
-    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[50vw] border border-white/20 mt-[4vw]">
+    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[65vw] xl:w-[50vw] border border-white/20 mt-[4vw]">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+        <h2 className="text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
           Create Account
         </h2>
         <p className="text-gray-800">Join our pet care community today</p>
@@ -108,11 +108,11 @@ export default function Signup() {
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-4">
-          <button className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all">
+          <button className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all flex-wrap">
             <FaGoogle className="text-red-400" />
             <span className="text-gray-600">Google</span>
           </button>
-          <button className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all">
+          <button className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 p-3 rounded-lg transition-all flex-wrap">
             <FaFacebook className="text-blue-700" />
             <span className="text-gray-500">Facebook</span>
           </button>

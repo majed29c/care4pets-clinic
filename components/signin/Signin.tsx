@@ -35,9 +35,9 @@ const Signin = () => {
   } 
 
   return (
-    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/20 w-[50vw] mt-[4vw]">
+    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/20 w-[65vw] xl:w-[50vw] mt-[4vw]">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+        <h2 className="text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
           Welcome Back
         </h2>
         <p className="text-gray-800">Sign in to manage your pet's care</p>
@@ -72,15 +72,15 @@ const Signin = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex md:items-center md:justify-between flex-col  md:flex-row xs:space-y-2 md:space-y-0">
           <label className="flex items-center space-x-2 text-gray-700 px-3">
             <input
               type="checkbox"
-              className="rounded bg-white/10 border-white/20 focus:ring-blue-400"
+              className="rounded bg-white/10 border-white/20 focus:ring-blue-400 "
             />
             <span className="text-sm">Remember me</span>
           </label>
-          <Link href="/signin/reset" className="text-sm text-blue-400 hover:text-blue-300">
+          <Link href="/signin/reset" className="text-sm pl-3 text-blue-400 hover:text-blue-300">
             Forgot password?
           </Link>
         </div>

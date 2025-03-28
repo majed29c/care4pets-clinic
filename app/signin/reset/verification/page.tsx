@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { motion } from "framer-motion";
 import { verify } from "@/actions/verify";
 import cookie from "js-cookie";
-
+import { useEffect } from "react";
 const Page = () => {
   const [digits, setDigits] = useState<string[]>(Array(6).fill(""));
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
@@ -38,13 +38,19 @@ const Page = () => {
     }
   };
 
-  const handlePaste = (e: React.ClipboardEvent) => {
-    e.preventDefault();
-    const paste = e.clipboardData.getData("text").slice(0, 6);
-    const newDigits = paste.split("").filter((c) => /\d/.test(c));
-    setDigits([...newDigits, ...Array(6 - newDigits.length).fill("")]);
-    if (newDigits.length === 6) handleSubmit(); 
-  };
+    const handlePaste = (e: React.ClipboardEvent) => {
+      e.preventDefault();
+      const paste = e.clipboardData.getData("text").slice(0, 6);
+      const newDigits = paste.split("").filter((c) => /\d/.test(c));
+  
+      setDigits([...newDigits, ...Array(6 - newDigits.length).fill("")]);
+    };
+  
+    useEffect(() => {
+      if (digits.every((d) => d !== "")) {
+        handleSubmit();
+      }
+    }, [digits]);
 
   const handleSubmit = async () => {
     const email = cookie.get("email");
@@ -73,16 +79,16 @@ const Page = () => {
 
   return (
     <div className="flex w-full justify-center items-center">
-      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[50vw] border border-white/20 mt-[4vw]">
+      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[65vw] lg:w-[50vw] border border-white/20 mt-[4vw]">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+          <h2 className="text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
             Reset Password
           </h2>
           <p className="text-gray-800">Please enter your 6-digit verification code</p>
           {message && !success && <p className="text-red-500 text-sm text-center">{message}</p>}
           {message && success && <p className="text-green-500 text-sm text-center">{message}</p>}
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-            <div className="flex justify-center space-x-4 pt-20 pb-20 gap-3">
+            <div className="flex justify-center space-x-2 lg:space-x-4 pt-20 pb-20 gap-0 lg:gap-3">
               {digits.map((digit, index) => (
                 <motion.div key={index} initial={{ scale: 1 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <input
@@ -95,7 +101,7 @@ const Page = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-14 h-14 text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-xl border-2 border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
+                    className="w-8 h-8 lg:w-14 lg:h-14 text-2xl lg:text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-md border-gray-700  lg:rounded-xl border-2 lg:border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
                     autoFocus={index === 0}
                     aria-label={`Digit input ${index + 1}`}
                   />

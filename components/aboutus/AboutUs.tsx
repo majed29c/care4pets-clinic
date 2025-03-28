@@ -3,16 +3,17 @@ import Photo3 from "../../public/photo3.jpg";
 import Photo4 from "../../public/photo4.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 const AboutUs = () => {
+ 
   return (
-      <div className="max-w-7xl mx-auto px-6 mt-[4vw]">
+      <div className="max-w-7xl mx-auto px-6 mt-[4vw] py-4 my-4">
         <div className="text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4 font-roboto bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to Care4Pets</h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <h2 className="xs:text-2xl lg:text-4xl  font-bold text-gray-800 mb-4 font-roboto bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome to Care4Pets</h2>
+          <p className=" text-xl text-gray-600 mb-8">
             Your pet’s health and happiness are our top priorities. We treat every pet like family.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[10vw] mt-[8vw]">
-          <div className="flex flex-col justify-center space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[10vw]  mt-16 lg:mt-[8vw] py-4">
+          <div className="flex flex-col justify-center space-y-4 xs:text-center lg:text-left">
             <h3 className="text-2xl font-semibold text-gray-800 font-roboto">Our Story</h3>
             <p className="text-lg text-gray-600">
               Care4Pets was founded by passionate veterinarians who have a deep love for animals. We wanted
@@ -39,8 +40,8 @@ const AboutUs = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[10vw] mt-16">
-          <div className="flex justify-center items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[10vw] mt-16 ">
+          <div className="flex justify-center items-center order-2 lg:order-1">
             <div className="w-full h-[300px] md:h-[400px] bg-gray-200 rounded-xl shadow-lg relative">
              
               <Image
@@ -53,7 +54,7 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center space-y-4">
+          <div className="flex flex-col justify-center space-y-4 order-1 lg:order-2 xs:text-center lg:text-left">
             <h3 className="text-2xl font-semibold text-gray-800">Why Choose Us?</h3>
             <ul className="text-lg text-gray-600 space-y-2">
               <li>Experienced & Compassionate Veterinarians</li>
@@ -65,7 +66,7 @@ const AboutUs = () => {
           </div>
         </div>
 
-        <div className="mt-[8vw]">
+        <div className="mt-16 lg:mt-[8vw] ">
           <div className="text-center">
             <h3 className="text-2xl font-semibold text-gray-800 mb-4 font-roboto">Giving Back to the Community</h3>
             <p className="text-lg text-gray-600 mb-4">
@@ -85,11 +86,11 @@ const AboutUs = () => {
             or emergency care, our team is here to help. Book an appointment today and let us take care of your furry companion with the love and expertise they deserve.
           </p>
           
-        <div className="mt-8 text-center flex w-full justify-center items-center">  
-          <button className="mt-[4vw] flex flex-row justify-center items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
+          <div className="mt-8 text-center flex w-full justify-center items-center">  
+            <button className="mt-[4vw]  flex flex-row justify-center items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
             <FaCalendarAlt className="mr-2" />
-            Book Appointment
-          </button>
+          Book Appointment
+        </button>
         </div>
         </div>
       </div>

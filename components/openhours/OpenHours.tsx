@@ -5,7 +5,7 @@ const OpeningHours = () => {
     <section className="w-full  py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold text-gray-800 flex items-center justify-center gap-3">
+          <h2 className="xs:text-2xl lg:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3">
             <FaClock className="text-blue-600" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
               Opening Hours
@@ -66,7 +66,7 @@ const OpeningHours = () => {
         </div>
 
         <div className="mt-8 text-center flex w-full justify-center items-center">  
-            <button className="mt-[4vw] flex flex-row justify-center items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
+            <button className="mt-[4vw]  flex flex-row justify-center items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
             <FaCalendarAlt className="mr-2" />
           Book Appointment
         </button>
