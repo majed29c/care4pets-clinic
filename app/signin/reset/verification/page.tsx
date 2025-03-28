@@ -77,6 +77,7 @@ const Page = () => {
     }
   };
 
+  
   return (
     <div className="flex w-full justify-center items-center">
       <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[65vw] lg:w-[50vw] border border-white/20 mt-[4vw]">
@@ -88,7 +89,7 @@ const Page = () => {
           {message && !success && <p className="text-red-500 text-sm text-center">{message}</p>}
           {message && success && <p className="text-green-500 text-sm text-center">{message}</p>}
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-            <div className="flex justify-center space-x-2 lg:space-x-4 pt-20 pb-20 gap-0 lg:gap-3">
+            <div className="flex justify-center space-x-2 lg:space-x-2 pt-20 pb-20 gap-0 lg:gap-3">
               {digits.map((digit, index) => (
                 <motion.div key={index} initial={{ scale: 1 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <input
@@ -101,7 +102,7 @@ const Page = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-8 h-8 lg:w-14 lg:h-14 text-2xl lg:text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-md border-gray-700  lg:rounded-xl border-2 lg:border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
+                    className="w-8 h-8 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-md border-gray-700  lg:rounded-xl border-2 lg:border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
                     autoFocus={index === 0}
                     aria-label={`Digit input ${index + 1}`}
                   />
