@@ -12,9 +12,25 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-model user{
+model User {
   id Int @id @default(autoincrement())
   name String
   email String @unique
   password String 
+  createdAt DateTime @default(now())
+  encrpted String @default("")
+}
+
+model Temp {
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+}
+
+model Authorization {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  encrypted String
 }
