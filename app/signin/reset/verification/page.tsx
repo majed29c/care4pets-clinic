@@ -66,6 +66,7 @@ const Page = () => {
       if(data.status == 200){
         setMessage(data.message);
         setSuccess(true);
+        cookie.set("isLoggedIn", "true", { expires: 1 });
         setTimeout(() => redirect("/"), 2000);
       }else{
         setMessage(data.message);

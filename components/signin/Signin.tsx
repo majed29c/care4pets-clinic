@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { login } from "../../actions/login";
 import { redirect } from "next/navigation";
-
+import cookie from "js-cookie";
 const Signin = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -27,6 +27,7 @@ const Signin = () => {
     if (data.status === 200) {
       setMessage("Login successful");
       setSuccess(true);
+      cookie.set("isLoggedIn",'true', { expires: 1 });
       redirect("/"); 
     } else {
       setMessage("Invalid credentials");
