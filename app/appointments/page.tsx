@@ -1,74 +1,39 @@
 "use client";
-import React, { useState } from "react";
-import { FiCheckCircle, FiAlertCircle, FiUser, FiMail, FiCalendar, FiClock, FiPlus } from "react-icons/fi";
+import React, { useEffect, useState } from "react";
+import {
+  FiCheckCircle,
+  FiAlertCircle,
+  FiUser,
+  FiMail,
+  FiCalendar,
+  FiClock,
+  FiPlus,
+} from "react-icons/fi";
+import { gettime } from "@/actions/gettime";
 
 export const services = [
-  {
-    title: "General Check-ups & Vaccinations",
-    description: "Routine health exams and vaccinations to keep your pets healthy and prevent diseases."
-  },
-  {
-    title: "Emergency & Surgery",
-    description: "Immediate medical attention and surgical procedures, including spaying, neutering, and injury treatment."
-  },
-  {
-    title: "Dental Care & Diagnostics",
-    description: "Professional teeth cleaning, extractions, and oral health check-ups to prevent infections and maintain dental hygiene."
-  },
-  {
-    title: "Parasite Prevention & Microchipping",
-    description: "Protection against fleas, ticks, and worms, plus microchipping for permanent pet identification."
-  },
-  {
-    title: "Bathing & Grooming",
-    description: "Professional pet washing, fur trimming, and nail clipping to keep your pet clean and healthy."
-  },
-  {
-    title: "Skin & Coat Treatments",
-    description: "Specialized care for allergies, excessive shedding, and skin infections to ensure a healthy coat."
-  },
-  {
-    title: "Ear Cleaning & Nail Trimming",
-    description: "Essential hygiene services to prevent ear infections and maintain proper nail health."
-  },
-  {
-    title: "Physical Therapy & Recovery",
-    description: "Rehabilitation exercises and treatments to help pets recover from injuries or surgeries."
-  },
-  {
-    title: "Laser Therapy & Acupuncture",
-    description: "Alternative pain relief and healing methods to improve mobility and reduce discomfort."
-  },
-  {
-    title: "Overnight Stays",
-    description: "Safe and comfortable boarding options for pets when owners are away."
-  },
-  {
-    title: "Daycare Programs",
-    description: "Supervised play and socialization programs to keep pets entertained and active."
-  },
-  {
-    title: "Pet Training Sessions",
-    description: "Basic obedience, behavioral training, and problem-solving sessions to improve pet behavior."
-  },
-  {
-    title: "Nutritional Consultations",
-    description: "Expert guidance on pet diets to ensure optimal health, weight management, and overall well-being."
-  },
-  {
-    title: "Compassionate Euthanasia",
-    description: "Humane end-of-life care for aging or terminally ill pets in a comforting environment."
-  },
-  {
-    title: "Memorial Services",
-    description: "Support and options for honoring and remembering beloved pets."
-  }
+  { title: "General Check-ups & Vaccinations", description: "Routine health exams and vaccinations." },
+  { title: "Emergency & Surgery", description: "Immediate medical attention and surgical procedures." },
+  { title: "Dental Care & Diagnostics", description: "Professional teeth cleaning, extractions, and oral health check-ups." },
+  { title: "Parasite Prevention & Microchipping", description: "Protection against fleas, ticks, and worms." },
+  { title: "Bathing & Grooming", description: "Professional pet washing, fur trimming, and nail clipping." },
+  { title: "Skin & Coat Treatments", description: "Specialized care for allergies, excessive shedding, and skin infections." },
+  { title: "Ear Cleaning & Nail Trimming", description: "Essential hygiene services to prevent ear infections." },
+  { title: "Physical Therapy & Recovery", description: "Rehabilitation exercises and treatments for pets." },
+  { title: "Laser Therapy & Acupuncture", description: "Alternative pain relief and healing methods." },
+  { title: "Overnight Stays", description: "Safe boarding options for pets." },
+  { title: "Daycare Programs", description: "Supervised play and socialization programs." },
+  { title: "Pet Training Sessions", description: "Basic obedience, behavioral training, and problem-solving sessions." },
+  { title: "Nutritional Consultations", description: "Expert guidance on pet diets to ensure optimal health." },
+  { title: "Compassionate Euthanasia", description: "Humane end-of-life care for aging or terminally ill pets." },
+  { title: "Memorial Services", description: "Support and options for honoring and remembering pets." }
 ];
-
 
 const Appointment = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -77,9 +42,42 @@ const Appointment = () => {
     service: "",
   });
 
+  useEffect(() => {
+    const fetchTime = async () => {
+      if (!formData.date) return;
+
+      const selectedDate = new Date(formData.date);
+      const day = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+      const baseTimeList = (day >= 1 && day <= 5) ? ["8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"] : (day === 6 ? ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00"] : []);
+
+      if (baseTimeList.length === 0) {
+        setAvailableTimes([]);
+        return;
+      }
+
+      try {
+        const resp = await gettime({ date: formData.date });
+        const data = JSON.parse(resp);
+
+        if (data.status === 200) {
+          const filteredTimes = baseTimeList.filter((time) => !data.data.includes(time));
+          setAvailableTimes(filteredTimes);
+        }
+      } catch (err) {
+        console.error("Error fetching times:", err);
+      }
+    };
+
+    fetchTime();
+  }, [formData.date]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleTimeSelect = (time: string) => {
+    setFormData({ ...formData, time });
   };
 
   const handleServiceSelect = (serviceTitle: string) => {
@@ -103,7 +101,7 @@ const Appointment = () => {
   return (
     <div className="relative bg-white/20 backdrop-blur-2xl rounded-2xl shadow-2xl p-8 border-2 border-white/30 w-[90vw] sm:w-[70vw] lg:w-[50vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
       <div className="text-center mb-10">
-        <h2 className="text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4 animate-gradient">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4 animate-gradient">
           Schedule Your Session
         </h2>
         <p className="text-gray-700 text-lg font-light">Let's create something amazing together</p>
@@ -112,7 +110,7 @@ const Appointment = () => {
       <form className="space-y-8" onSubmit={handleSubmit}>
         <div className="space-y-6">
           {/* Service Selection */}
-          <div className="space-y-4">
+          <div className="space-y-4 flex flex-col justify-center items-center">
             <h3 className="text-gray-700 font-semibold text-lg">Select Service</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto p-2">
               {services.map((service) => (
@@ -165,34 +163,41 @@ const Appointment = () => {
             />
           </div>
 
-          {/* Date & Time Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Date Input */}
-            <div className="relative group">
-              <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
-              <input
-                type="date"
-                className="w-full pl-12 pr-6 py-4 bg-white/10 rounded-xl border-2 border-gray-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 outline-none transition-all text-gray-700"
-                required
-                onChange={handleChange}
-                name="date"
-                value={formData.date}
-              />
-            </div>
-
-            {/* Time Input */}
-            <div className="relative group">
-              <FiClock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
-              <input
-                type="time"
-                className="w-full pl-12 pr-6 py-4 bg-white/10 rounded-xl border-2 border-gray-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 outline-none transition-all text-gray-700"
-                required
-                onChange={handleChange}
-                name="time"
-                value={formData.time}
-              />
-            </div>
+          {/* Date Input */}
+          <div className="relative group">
+            <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
+            <input
+              type="date"
+              className="w-full pl-12 pr-6 py-4 bg-white/10 rounded-xl border-2 border-gray-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 outline-none transition-all text-gray-700"
+              required
+              onChange={handleChange}
+              name="date"
+              value={formData.date}
+            />
           </div>
+
+          {/* Available Times List */}
+          {formData.date && availableTimes.length > 0 && (
+            <div>
+              <h3 className="text-gray-700 font-semibold text-lg">Select Time</h3>
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                {availableTimes.map((time) => (
+                  <button
+                    key={time}
+                    type="button"
+                    onClick={() => handleTimeSelect(time)}
+                    className={`p-3 rounded-xl border-2 cursor-pointer transition-all ${
+                      formData.time === time
+                        ? "border-blue-500 bg-blue-50/20"
+                        : "border-gray-300 hover:border-blue-300"
+                    }`}
+                  >
+                    {time}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <button
