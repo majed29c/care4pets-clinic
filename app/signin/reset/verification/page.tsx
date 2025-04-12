@@ -110,9 +110,9 @@ const Page = () => {
 
   return (
     <div className="flex w-full justify-center items-center">
-      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[65vw] lg:w-[50vw] border border-white/20 mt-[4vw]">
+      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[90vw] md:w-[65vw]  lg:w-[50vw] border border-white/20 mt-[4vw]">
         <div className="text-center mb-8">
-          <h2 className="text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
             Reset Password
           </h2>
           <p className="text-gray-800">
@@ -126,7 +126,7 @@ const Page = () => {
           )}
 
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-            <div className="flex justify-center space-x-2 lg:space-x-2 pt-20 pb-20 gap-0 lg:gap-3">
+            <div className="flex justify-center space-x-3 lg:space-x-2 pt-20 pb-20 gap-0 lg:gap-3">
               {digits.map((digit, index) => (
                 <motion.div
                   key={index}
@@ -144,7 +144,7 @@ const Page = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-8 h-8 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-md border-gray-700  lg:rounded-xl border-2 lg:border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
+                    className="w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-md  lg:rounded-xl border-2 lg:border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
                     autoFocus={index === 0}
                     aria-label={`Digit input ${index + 1}`}
                   />

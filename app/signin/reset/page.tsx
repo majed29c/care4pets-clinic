@@ -33,9 +33,9 @@ const Page = () => {
 
   return (
     <div className="flex w-full justify-center items-center">
-      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8  border border-white/20 mt-[4vw] w-[65vw] xl:w-[50vw]">
+      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8  border border-white/20 mt-[4vw] w-[90vw] md:w-[65vw] xl:w-[50vw]">
         <div className="text-center mb-8">
-          <h2 className="text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
             Reset Password
           </h2>
           <p className="text-gray-800">Fill the info below to reset your password!</p>
