@@ -2,17 +2,19 @@
 import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaGoogle, FaFacebook } from "react-icons/fa";
 import Link from "next/link";
-import { createUser } from "../../actions/auth"; // Ensure path is correct
-import {redirect} from "next/navigation"; 
+import { createUser } from "../../actions/auth"; 
+import { redirect } from "next/navigation"; 
 import cookie from "js-cookie";
+
 export default function Signup() {
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState(""); // Message state
+  const [success, setSuccess] = useState(false); // Success state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -22,18 +24,21 @@ export default function Signup() {
     event.preventDefault();
 
     const formDataObj = new FormData(event.currentTarget);
-
     const response = await createUser(formDataObj);
     const data = JSON.parse(response);
 
     if (data.status === 200) {
+      // On success, redirect after 2 seconds
+      setSuccess(true);
+      setMessage("Verification code sent! Check your email.");
       setTimeout(() => {
         cookie.set("email", formData.email);
         redirect("/signup/verification");
       }, 2000);
     } else {
-      setMessage(data.message); 
+      // On failure, display error message
       setSuccess(false);
+      setMessage(data.message);
     }
   }
 
@@ -46,7 +51,7 @@ export default function Signup() {
         <p className="text-gray-800">Join our pet care community today</p>
       </div>
 
-      <form className="space-y-6" onSubmit={handleSubmit} action="POST">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div className="relative">
             <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" />
@@ -54,8 +59,8 @@ export default function Signup() {
               type="text"
               placeholder="Full Name"
               name="name"
-              value={formData.name}  // Bind value to state
-              onChange={handleChange} // Use the handleChange function
+              value={formData.name}
+              onChange={handleChange}
               className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 placeholder-gray-600"
               required
             />
@@ -67,8 +72,8 @@ export default function Signup() {
               type="email"
               name="email"
               placeholder="Email Address"
-              value={formData.email}  // Bind value to state
-              onChange={handleChange} // Use the handleChange function
+              value={formData.email}
+              onChange={handleChange}
               className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 placeholder-gray-600"
               required
             />
@@ -80,8 +85,8 @@ export default function Signup() {
               type="password"
               placeholder="Password"
               name="password"
-              value={formData.password}  // Bind value to state
-              onChange={handleChange} // Use the handleChange function
+              value={formData.password}
+              onChange={handleChange}
               className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 placeholder-gray-600"
               required
             />
@@ -126,6 +131,7 @@ export default function Signup() {
         </Link>
       </p>
 
+      {/* Success/Failure Messages */}
       {message && success && <p className="mt-4 text-center text-green-400">{message}</p>}
       {message && !success && <p className="mt-4 text-center text-red-500">{message}</p>}
     </div>

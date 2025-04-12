@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useState, useRef } from "react";
 import { redirect } from "next/navigation";
-import { motion } from "framer-motion";
 import { verifysignup } from "@/actions/verifysignup";
+import { motion } from "framer-motion";
 import cookie from "js-cookie";
 import cookies from "js-cookie";
 const Page = () => {
