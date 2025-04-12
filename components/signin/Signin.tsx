@@ -9,7 +9,7 @@ const Signin = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    email: "", // Fixed typo (was "emai")
+    email: "",
     password: "",
   });
 
@@ -36,9 +36,9 @@ const Signin = () => {
   } 
 
   return (
-    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/20 w-[65vw] xl:w-[50vw] mt-[4vw]">
+    <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/20 w-[90vw] md:w-[65vw] xl:w-[50vw] mt-[4vw]">
       <div className="text-center mb-8">
-        <h2 className="text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
           Welcome Back
         </h2>
         <p className="text-gray-800">Sign in to manage your pet's care</p>
@@ -46,13 +46,13 @@ const Signin = () => {
 
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="space-y-4">
-          {/* Email Input */}
+          
           <div className="relative">
             <FaEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-700" />
             <input
               type="email"
               placeholder="Email Address"
-              className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-gray-700"
+              className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-800 placeholder-gray-700"
               required
               onChange={handleChange}
               name="email"
@@ -65,7 +65,7 @@ const Signin = () => {
             <input
               type="password"
               placeholder="Password"
-              className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-gray-700"
+              className="w-full pl-10 pr-4 py-3 bg-white/5 rounded-lg border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-800 placeholder-gray-700"
               required
               onChange={handleChange}
               name="password"
