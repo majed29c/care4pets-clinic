@@ -29,13 +29,14 @@ export const services = [
   { title: "Compassionate Euthanasia", description: "Humane end-of-life care for aging or terminally ill pets." },
   { title: "Memorial Services", description: "Support and options for honoring and remembering pets." }
 ];
-
+import { getInfo } from "@/actions/getInfo";
+import cookie from "js-cookie";
 const Appointment = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
   const [bookedTimes, setBookedTimes] = useState<string[]>([]);
-
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,6 +44,29 @@ const Appointment = () => {
     time: "",
     service: "",
   });
+  useEffect(() => {
+    const fetchInfo = async () => {
+        const email = cookie.get("email") as string;
+        try{
+          
+        const resp = await getInfo(email);
+        const data = await JSON.parse(resp) as {status:number, data:{name:string}};
+         if(data.status!==200){
+          return;
+         }
+         const name= data.data.name;
+         setFormData((prev) => ({ ...prev, name }));
+         setFormData((prev) => ({ ...prev, email }));
+        }catch(error: any){
+          console.error("Error fetching info:", error);
+          return;
+        }
+        
+    }
+    fetchInfo();
+
+  }
+  ,[]); 
 
   useEffect(() => {
     const fetchTime = async () => {
@@ -161,6 +185,7 @@ const Appointment = () => {
               onChange={handleChange}
               name="name"
               value={formData.name}
+              readOnly
             />
           </div>
           {/* Email Input */}
@@ -174,6 +199,7 @@ const Appointment = () => {
               onChange={handleChange}
               name="email"
               value={formData.email}
+              readOnly
             />
           </div>
 
