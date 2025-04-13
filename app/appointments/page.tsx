@@ -67,10 +67,10 @@ const Appointment = () => {
         const data = JSON.parse(resp);
 
         if (data.status === 200) {
-          const booked = data.data.map((item: { time: string }) => item.time); // Extract booked times from the response
-          setBookedTimes(booked); // Update the booked times state
+          const booked = data.data.map((item: { time: string }) => item.time); 
+          setBookedTimes(booked); 
           const filteredTimes = baseTimeList.filter((time) => !booked.includes(time));
-          setAvailableTimes(filteredTimes); // Update the available times state
+          setAvailableTimes(filteredTimes); 
         }
       } catch (err) {
         console.error("Error fetching times:", err);
@@ -125,7 +125,6 @@ const Appointment = () => {
 
       <form className="space-y-8" onSubmit={handleSubmit}>
         <div className="space-y-6">
-          {/* Service Selection */}
           <div className="space-y-4 flex flex-col justify-center items-center">
             <h3 className="text-gray-700 font-semibold text-lg">Select Service</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto p-2">
