@@ -20,7 +20,7 @@ export async function gettime(dateObj: DateObject) {
 
     const data = appointmentsSnap.docs.map(doc => ({
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     }));
 
     return JSON.stringify({ message: "Appointments retrieved successfully", status: 200, data });

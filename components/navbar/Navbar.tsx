@@ -33,12 +33,12 @@ const Navbar = () => {
         }
    },[]);
     return (
-        <div className="w-full h-auto flex flex-row items-center">
+        <div className="w-full h-auto flex flex-row items-center bg-none lg:bg-[#c8c8c5] shadow-none lg:shadow-xl py-4">
             <div className="flex justify-center items-center xl:ml-[4vw]">
                 <Image 
                     src={Logo} 
                     alt="Care4Pets Logo" 
-                    className="w-[4rem] sm:w-[6rem] lg:w-[6rem] xl:w-[7vw] h-auto ml-[2rem] lg:ml-[1rem] xl:h-[7vw]"
+                    className="w-[4rem] sm:w-[6rem] lg:w-[6rem] xl:w-[6vw] h-auto  ml-[2rem] lg:ml-[1rem] xl:h-[6vw]"
                 />
             </div>
 
@@ -49,8 +49,7 @@ const Navbar = () => {
                     <Link href="/services" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Services</Link>
                     <Link href="/appointments" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Appointments</Link>
                     <Link href="/gallery" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Gallery</Link>
-                    <Link href="/contact" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Contact Us</Link>
-                </div>
+                   </div>
             )}
 
             {!isMobile && !isLoggedIn && (

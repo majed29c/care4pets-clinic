@@ -100,13 +100,7 @@ const Sidebar = (props: SidebarProps) => {
           <span>Gallery</span>
         </Link>
       </button>
-      
-      <button onClick={closeMenu}>
-        <Link href="/contact" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
-          <RiContactsLine size={isSmall ? 15 : 24} />
-          <span>Contact Us</span>
-        </Link>
-      </button>
+     
       <button onClick={() => {
             cookies.remove('isLoggedIn');
             setIsLoggedIn(false);

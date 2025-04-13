@@ -54,12 +54,15 @@ const OpeningHours = () => {
             </div>
 
             {/* Sunday */}
-            <div className="p-4 bg-red-50 rounded-xl shadow-sm border border-red-100 relative overflow-hidden">
+            <div className="p-4 bg-red-50 rounded-xl shadow-sm border border-red-100 relative overflow-hidden hover:shadow-md transition-shadow">
               <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent" />
               <div className="text-center relative">
-                <FaRegSadTear className="mx-auto text-red-400 mb-2" />
                 <h3 className="text-lg font-semibold text-red-600">Sunday</h3>
-                <p className="text-red-400 mt-1">Closed</p>
+                <div className="flex flex-row justify-center items-center gap-2">
+                <p  className="text-red-400 mt-1">Closed</p>
+                <FaRegSadTear className="text-red-400 mt-1" />
+                </div>
+
               </div>
             </div>
           </div>

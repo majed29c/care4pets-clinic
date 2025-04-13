@@ -10,6 +10,7 @@ import {
   FiPlus,
 } from "react-icons/fi";
 import { gettime } from "@/actions/gettime";
+import { book } from "@/actions/book";
 
 export const services = [
   { title: "General Check-ups & Vaccinations", description: "Routine health exams and vaccinations." },
@@ -33,6 +34,7 @@ const Appointment = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+  const [bookedTimes, setBookedTimes] = useState<string[]>([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -47,24 +49,33 @@ const Appointment = () => {
       if (!formData.date) return;
 
       const selectedDate = new Date(formData.date);
-      const day = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
-      const baseTimeList = (day >= 1 && day <= 5) ? ["8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"] : (day === 6 ? ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00"] : []);
+      const day = selectedDate.getDay();
+      const baseTimeList = (day >= 1 && day <= 5)
+        ? ["8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"]
+        : (day === 6
+          ? ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00"]
+          : []);
 
       if (baseTimeList.length === 0) {
         setAvailableTimes([]);
+        setBookedTimes([]);
         return;
       }
 
       try {
-        const resp = await gettime({ date: formData.date });
+        const resp = await gettime(formData);
         const data = JSON.parse(resp);
 
         if (data.status === 200) {
-          const filteredTimes = baseTimeList.filter((time) => !data.data.includes(time));
-          setAvailableTimes(filteredTimes);
+          const booked = data.data.map((item: { time: string }) => item.time); // Extract booked times from the response
+          setBookedTimes(booked); // Update the booked times state
+          const filteredTimes = baseTimeList.filter((time) => !booked.includes(time));
+          setAvailableTimes(filteredTimes); // Update the available times state
         }
       } catch (err) {
         console.error("Error fetching times:", err);
+        setAvailableTimes([]);
+        setBookedTimes([]);
       }
     };
 
@@ -87,10 +98,15 @@ const Appointment = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      setTimeout(() => {
+      const resp = await book(formData);
+      const data = JSON.parse(resp);
+      if (data.status !== 200) {
+        setMessage("Failed to book the appointment!");
+        setSuccess(false);
+      } else {
         setMessage("Appointment booked successfully!");
         setSuccess(true);
-      }, 1000);
+      }
     } catch (error) {
       console.error("Error booking appointment:", error);
       setMessage("An error occurred. Please try again.");
@@ -181,20 +197,23 @@ const Appointment = () => {
             <div>
               <h3 className="text-gray-700 font-semibold text-lg">Select Time</h3>
               <div className="grid grid-cols-2 gap-4 mt-4">
-                {availableTimes.map((time) => (
-                  <button
-                    key={time}
-                    type="button"
-                    onClick={() => handleTimeSelect(time)}
-                    className={`p-3 rounded-xl border-2 cursor-pointer transition-all ${
-                      formData.time === time
-                        ? "border-blue-500 bg-blue-50/20"
-                        : "border-gray-300 hover:border-blue-300"
-                    }`}
-                  >
-                    {time}
-                  </button>
-                ))}
+                {availableTimes.map((time) => {
+                  const isSelected = formData.time === time;
+
+                  return (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => handleTimeSelect(time)}
+                      className={`p-3 rounded-xl border-2 text-center transition-all
+                        ${isSelected ? "border-blue-500 bg-blue-50/20" :
+                          "border-gray-300 hover:border-blue-300 cursor-pointer"
+                        }`}
+                    >
+                      {time}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
