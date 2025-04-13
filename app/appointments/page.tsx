@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 import { gettime } from "@/actions/gettime";
 import { book } from "@/actions/book";
-
+import BookedAppointments from "@/components/bookedappointments/BookedAppointments";
 export const services = [
   { title: "General Check-ups & Vaccinations", description: "Routine health exams and vaccinations." },
   { title: "Emergency & Surgery", description: "Immediate medical attention and surgical procedures." },
@@ -115,6 +115,7 @@ const Appointment = () => {
   };
 
   return (
+    <>
     <div className="relative bg-white/20 backdrop-blur-2xl rounded-2xl shadow-2xl p-8 border-2 border-white/30 w-[90vw] sm:w-[70vw] lg:w-[50vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
       <div className="text-center mb-10">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4 animate-gradient">
@@ -150,7 +151,6 @@ const Appointment = () => {
             </div>
           </div>
 
-          {/* Name Input */}
           <div className="relative group">
             <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
             <input
@@ -163,7 +163,6 @@ const Appointment = () => {
               value={formData.name}
             />
           </div>
-
           {/* Email Input */}
           <div className="relative group">
             <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
@@ -191,7 +190,6 @@ const Appointment = () => {
             />
           </div>
 
-          {/* Available Times List */}
           {formData.date && availableTimes.length > 0 && (
             <div>
               <h3 className="text-gray-700 font-semibold text-lg">Select Time</h3>
@@ -227,7 +225,6 @@ const Appointment = () => {
         </button>
       </form>
 
-      {/* Status Message */}
       {message && (
         <div className={`mt-6 p-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
           {success ? (
@@ -240,7 +237,10 @@ const Appointment = () => {
           </p>
         </div>
       )}
+
     </div>
+    <BookedAppointments />
+   </>
   );
 };
 
