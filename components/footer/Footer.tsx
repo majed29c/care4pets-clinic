@@ -2,12 +2,12 @@ import { FaInstagram, FaTwitter, FaFacebook, FaPhone, FaMapMarker, FaEnvelope } 
 import Link from "next/link";
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-blue-900 to-purple-900 text-white mt-12">
+    <footer className="bg-secondary text-white mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            <h3 className="text-2xl font-bold bg-clip-text text-light">
               PetCare Clinic
             </h3>
             <p className="text-gray-300 text-sm">
@@ -44,15 +44,15 @@ const Footer = () => {
             <h4 className="text-lg font-semibold">Contact Us</h4>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <FaMapMarker className="text-blue-400" />
+                <FaMapMarker className="text-" />
                 <span className="text-gray-300">123 Pet Care Street<br/>New York, NY 10001</span>
               </div>
               <div className="flex items-center space-x-2">
-                <FaPhone className="text-blue-400" />
+                <FaPhone className="text-background" />
                 <span className="text-gray-300">(555) 123-4567</span>
               </div>
               <div className="flex items-center space-x-2">
-                <FaEnvelope className="text-blue-400" />
+                <FaEnvelope className="text-background" />
                 <span className="text-gray-300">contact@petcare.com</span>
               </div>
             </div>
@@ -72,7 +72,7 @@ const Footer = () => {
               />
               <button 
                 type="submit"
-                className="bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 rounded-lg hover:opacity-90 transition"
+                className="bg-light px-4 py-2 rounded-lg text-secondary hover:opacity-90 transition hover:scale-105"
               >
                 Subscribe
               </button>

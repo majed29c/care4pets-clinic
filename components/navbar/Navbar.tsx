@@ -33,7 +33,7 @@ const Navbar = () => {
         }
    },[]);
     return (
-        <div className="w-full h-auto flex flex-row items-center bg-none lg:bg-[#c8c8c5] shadow-none lg:shadow-xl py-4">
+        <div className="w-full h-auto flex flex-row items-center bg-none  shadow-none  py-4">
             <div className="flex justify-center items-center xl:ml-[4vw]">
                 <Image 
                     src={Logo} 
@@ -44,22 +44,22 @@ const Navbar = () => {
 
             {!isMobile && (
                 <div className="flex flex-row justify-center items-center gap-[4rem] w-[60vw] ml-[10vw] xl:flex lg:gap-[2rem] lg:ml-[4vw] xl:gap-[4vw]"> 
-                    <Link href="/" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Home</Link>
-                    <Link href="/about" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">About Us</Link>
-                    <Link href="/services" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Services</Link>
-                    <Link href="/appointments" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Appointments</Link>
-                    <Link href="/gallery" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto hover:text-gray-500">Gallery</Link>
+                    <Link href="/" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto text-charcoal hover:text-gray-500">Home</Link>
+                    <Link href="/about" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto  text-charcoal hover:text-gray-500">About Us</Link>
+                    <Link href="/services" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto  text-charcoal hover:text-gray-500">Services</Link>
+                    <Link href="/appointments" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto  text-charcoal hover:text-gray-500">Appointments</Link>
+                    <Link href="/gallery" className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto  text-charcoal hover:text-gray-500">Gallery</Link>
                    </div>
             )}
 
             {!isMobile && !isLoggedIn && (
                 <div className="flex flex-row items-center justify-center xl:w-[20vw] gap-[2rem] lg:mr-[1vw] xl:ml-[4vw]">
                     <Link href="/signin">
-                        <button className="border-none outline-none rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-roboto text-[1.5rem] w-[7vw] h-[3rem] lg:text-[1rem] xl:text-[1.3vw] xl:h-[2.8vw] hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 transition-transform duration-300 hover:scale-105">
+                        <button className="border-none outline-none rounded-lg bg-secondary text-white font-roboto text-[1.5rem] w-[7vw] h-[3rem] lg:text-[1rem] xl:text-[1.3vw] xl:h-[2.8vw] transition-transform duration-300 hover:scale-105 hover:bg-hovered">
                             Sign In
                         </button>
                     </Link>
-                    <Link href="/signup" className="font-roboto text-[1.5rem] lg:text-[1rem] xl:w-[8vw] xl:text-[1.3vw] hover:text-gray-500">
+                    <Link href="/signup" className="font-roboto text-[1.5rem] lg:text-[1rem] xl:w-[8vw] xl:text-[1.3vw] text-[var(--color-text)] hover:text-gray-500">
                         Sign Up
                     </Link>
                 </div>

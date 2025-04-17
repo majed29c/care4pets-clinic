@@ -140,7 +140,7 @@ const Appointment = () => {
 
   return (
     <>
-    <div className="relative bg-white/20 backdrop-blur-2xl rounded-2xl shadow-2xl p-8 border-2 border-white/30 w-[90vw] sm:w-[70vw] lg:w-[50vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
+    <div className="relative bg-white/20 backdrop-blur-2xl rounded-2xl shadow-2xl p-8 border-2 border-white/30 w-[90vw] sm:w-[70vw] lg:w-[80vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
       <div className="text-center mb-10">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4 animate-gradient">
           Schedule Your Session
@@ -220,6 +220,7 @@ const Appointment = () => {
             <div>
               <h3 className="text-gray-700 font-semibold text-lg">Select Time</h3>
               <div className="grid grid-cols-2 gap-4 mt-4">
+              
                 {availableTimes.map((time) => {
                   const isSelected = formData.time === time;
 

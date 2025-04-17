@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}", // Fixed typo: "tx" → "ts"
+    "./app/**/*.{js,ts,jsx,tsx}", 
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -53,6 +53,12 @@ module.exports = {
       },
       fontFamily: {
         roboto: ["Roboto Mono", "monospace"], // Removed extra quotes
+      },colors: {
+        secondary: "#350967",
+        hovered: "#4F1B7F",
+        charcoal: "#1F1F1F",
+        light: "#F5F1F9",
+        backgorund: "#E1D4ED",
       },
       keyframes: {
         slideLeft: {

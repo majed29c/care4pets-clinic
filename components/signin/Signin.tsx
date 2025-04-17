@@ -27,6 +27,7 @@ const Signin = () => {
     if (data.status === 200) {
       setMessage("Login successful");
       setSuccess(true);
+      cookie.set("email", formData.email, { expires: 1 });
       cookie.set("isLoggedIn",'true', { expires: 1 });
       redirect("/"); 
     } else {
