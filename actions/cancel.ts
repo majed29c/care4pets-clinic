@@ -18,7 +18,11 @@ export async function cancelAppointment(appointmentId: string) {
             message: "Appointment cancelled successfully",
             status: 200,
         });
+    }catch (error: any) {
+        return JSON.stringify({
+            message: "Error cancelling appointment",
+            status: 500,
+            error: error.message,
+        });
     }
-
-
 }
