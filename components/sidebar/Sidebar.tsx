@@ -52,7 +52,7 @@ const Sidebar = (props: SidebarProps) => {
   },[]);
   return (
     <div 
-      className={`flex flex-col h-screen xs:w-[65vw] md:w-[50vw] px-6 py-6 space-y-6 bg-gradient-to-b from-blue-600 to-purple-600 text-white font-roboto opacity-95 z-20 
+      className={`flex flex-col h-screen xs:w-[65vw] md:w-[50vw] px-6 py-6 space-y-6 bg-secondary text-white font-roboto opacity-95 z-20 
         transition-all ease-in-out duration-500 ${props.isOpen ? 'animate-slideLeft' : ''} ${isClosed ? 'animate-slideRight' : ''}`}
     >
       <button className="flex absolute top-2 right-2 z-20" onClick={handleClose}>
@@ -100,7 +100,8 @@ const Sidebar = (props: SidebarProps) => {
           <span>Gallery</span>
         </Link>
       </button>
-     
+      
+            {isLoggedIn && (  
       <button onClick={() => {
             cookies.remove('isLoggedIn');
             setIsLoggedIn(false);
@@ -110,7 +111,9 @@ const Sidebar = (props: SidebarProps) => {
               <RiLoginBoxLine size={isSmall ? 15 : 24} />
               <span>Logout</span>
             </span>
+            
           </button>
+            )}
       
       {!isLoggedIn &&
        (

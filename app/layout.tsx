@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="scrollbar-hide overflow-auto">
         <div className="fixed inset-0 -z-50">
-          <div className="absolute inset-0 bg-gradient-to-br bg-backgorund opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-br bg-background opacity-100" />
           <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]" />
         </div>
 

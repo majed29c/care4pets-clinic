@@ -58,7 +58,7 @@ module.exports = {
         hovered: "#4F1B7F",
         charcoal: "#1F1F1F",
         light: "#F5F1F9",
-        backgorund: "#E1D4ED",
+        background: "#E1D4ED",
       },
       keyframes: {
         slideLeft: {
