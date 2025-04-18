@@ -5,6 +5,7 @@ import { useState } from "react";
 import { login } from "../../actions/login";
 import { redirect } from "next/navigation";
 import cookie from "js-cookie";
+import { reload } from "firebase/auth/cordova";
 const Signin = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -29,11 +30,12 @@ const Signin = () => {
       setSuccess(true);
       cookie.set("email", formData.email, { expires: 1 });
       cookie.set("isLoggedIn",'true', { expires: 1 });
-      redirect("/"); 
+      window.location.href = "/";
     } else {
       setMessage("Invalid credentials");
       setSuccess(false);
     }
+
   } 
 
   return (
@@ -75,10 +77,10 @@ const Signin = () => {
         </div>
 
         <div className="flex md:items-center md:justify-between flex-col  md:flex-row xs:space-y-2 md:space-y-0">
-          <label className="flex items-center space-x-2 text-gray-700 px-3">
+          <label className="flex items-center space-x-2 text-charcoal px-3">
             <input
               type="checkbox"
-              className="rounded bg-white/10 border-white/20 focus:ring-secondary "
+              className="rounded focus:ring-secondary "
             />
             <span className="text-sm text-charcoal">Remember me</span>
           </label>
@@ -94,8 +96,6 @@ const Signin = () => {
           Sign In
         </button>
       </form>
-
-      {/* Social Login */}
       <div className="mt-8">
         <div className="relative">
           <div className="absolute inset-0 flex items-center">

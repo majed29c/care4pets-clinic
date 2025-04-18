@@ -12,6 +12,9 @@ import {
 import { gettime } from "@/actions/gettime";
 import { book } from "@/actions/book";
 import BookedAppointments from "@/components/bookedappointments/BookedAppointments";
+import { getInfo } from "@/actions/getInfo";
+import cookie from "js-cookie";
+
 export const services = [
   { title: "General Check-ups & Vaccinations", description: "Routine health exams and vaccinations." },
   { title: "Emergency & Surgery", description: "Immediate medical attention and surgical procedures." },
@@ -29,55 +32,48 @@ export const services = [
   { title: "Compassionate Euthanasia", description: "Humane end-of-life care for aging or terminally ill pets." },
   { title: "Memorial Services", description: "Support and options for honoring and remembering pets." }
 ];
-import { getInfo } from "@/actions/getInfo";
-import cookie from "js-cookie";
+
 const Appointment = () => {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
   const [availableTimes, setAvailableTimes] = useState<string[]>([]);
   const [bookedTimes, setBookedTimes] = useState<string[]>([]);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     date: "",
     time: "",
     service: "",
+    species: "", 
   });
+
   useEffect(() => {
     const fetchInfo = async () => {
-        const email = cookie.get("email") as string;
-        try{
-          
+      const email = cookie.get("email") as string;
+      try {
         const resp = await getInfo(email);
-        const data = await JSON.parse(resp) as {status:number, data:{name:string}};
-         if(data.status!==200){
-          return;
-         }
-         const name= data.data.name;
-         setFormData((prev) => ({ ...prev, name }));
-         setFormData((prev) => ({ ...prev, email }));
-        }catch(error: any){
-          console.error("Error fetching info:", error);
-          return;
-        }
-        
-    }
+        const data = await JSON.parse(resp) as { status: number, data: { name: string } };
+        if (data.status !== 200) return;
+        const name = data.data.name;
+        setFormData((prev) => ({ ...prev, name }));
+        setFormData((prev) => ({ ...prev, email }));
+      } catch (error: any) {
+        console.error("Error fetching info:", error);
+      }
+    };
     fetchInfo();
-
-  }
-  ,[]); 
+  }, []);
 
   useEffect(() => {
     const fetchTime = async () => {
       if (!formData.date) return;
-
       const selectedDate = new Date(formData.date);
       const day = selectedDate.getDay();
       const baseTimeList = (day >= 1 && day <= 5)
-        ? ["8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"]
+        ? ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"]
         : (day === 6
-          ? ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00"]
+          ? ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00"]
           : []);
 
       if (baseTimeList.length === 0) {
@@ -89,12 +85,11 @@ const Appointment = () => {
       try {
         const resp = await gettime(formData);
         const data = JSON.parse(resp);
-
         if (data.status === 200) {
-          const booked = data.data.map((item: { time: string }) => item.time); 
-          setBookedTimes(booked); 
+          const booked = data.data.map((item: { time: string }) => item.time);
+          setBookedTimes(booked);
           const filteredTimes = baseTimeList.filter((time) => !booked.includes(time));
-          setAvailableTimes(filteredTimes); 
+          setAvailableTimes(filteredTimes);
         }
       } catch (err) {
         console.error("Error fetching times:", err);
@@ -106,7 +101,7 @@ const Appointment = () => {
     fetchTime();
   }, [formData.date]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -130,6 +125,10 @@ const Appointment = () => {
       } else {
         setMessage("Appointment booked successfully!");
         setSuccess(true);
+        setTimeout(() => {
+          window.location.reload();
+          window.scrollTo(0, 0);
+        }, 500);
       }
     } catch (error) {
       console.error("Error booking appointment:", error);
@@ -140,134 +139,153 @@ const Appointment = () => {
 
   return (
     <>
-    <div className="relative bg-white/20 backdrop-blur-2xl rounded-2xl shadow-2xl p-8 border-2 border-white/30 w-[90vw] sm:w-[70vw] lg:w-[80vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
-      <div className="text-center mb-10">
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-4 animate-gradient">
-          Schedule Your Session
-        </h2>
-        <p className="text-gray-700 text-lg font-light">Let's create something amazing together</p>
-      </div>
+      <div className="relative bg-light backdrop-blur-2xl rounded-2xl shadow-2xl p-8 w-[90vw] sm:w-[70vw] lg:w-[80vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
+        <div className="text-center mb-10">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary mb-4 animate-gradient">
+            Schedule Your Session
+          </h2>
+          <p className="text-charcoal text-lg font-semibold">Let's create something amazing together</p>
+        </div>
 
-      <form className="space-y-8" onSubmit={handleSubmit}>
-        <div className="space-y-6">
-          <div className="space-y-4 flex flex-col justify-center items-center">
-            <h3 className="text-gray-700 font-semibold text-lg">Select Service</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto p-2">
-              {services.map((service) => (
-                <div
-                  key={service.title}
-                  onClick={() => handleServiceSelect(service.title)}
-                  className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                    formData.service === service.title
-                      ? "border-blue-500 bg-blue-50/20"
-                      : "border-gray-300 hover:border-blue-300"
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <FiPlus className="mt-1 text-blue-500 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-gray-700 font-medium">{service.title}</h4>
-                      <p className="text-gray-600 text-sm mt-1">{service.description}</p>
+        <form className="space-y-8" onSubmit={handleSubmit}>
+          <div className="space-y-6">
+
+            {/* Service Selection */}
+            <div className="space-y-4 flex flex-col justify-center items-center">
+              <h3 className="text-charcoal font-semibold text-lg">Select Service</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto p-2">
+                {services.map((service) => (
+                  <div
+                    key={service.title}
+                    onClick={() => handleServiceSelect(service.title)}
+                    className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                      formData.service === service.title
+                        ? "border-blue-500 bg-blue-50/20"
+                        : "border-gray-300 hover:border-blue-300"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <FiPlus className="mt-1 text-blue-500 flex-shrink-0" />
+                      <div>
+                        <h4 className="text-charcoal font-medium">{service.title}</h4>
+                        <p className="text-charcoal text-sm mt-1">{service.description}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative group">
-            <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full pl-12 pr-6 py-4 bg-white/10 rounded-xl border-2 border-gray-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 outline-none transition-all placeholder:text-gray-700 text-gray-700"
-              required
-              onChange={handleChange}
-              name="name"
-              value={formData.name}
-              readOnly
-            />
-          </div>
-          {/* Email Input */}
-          <div className="relative group">
-            <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full pl-12 pr-6 py-4 bg-white/10 rounded-xl border-2 border-gray-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 outline-none transition-all placeholder:text-gray-700 text-gray-700"
-              required
-              onChange={handleChange}
-              name="email"
-              value={formData.email}
-              readOnly
-            />
-          </div>
-
-          {/* Date Input */}
-          <div className="relative group">
-            <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
-            <input
-              type="date"
-              className="w-full pl-12 pr-6 py-4 bg-white/10 rounded-xl border-2 border-gray-300 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 outline-none transition-all text-gray-700"
-              required
-              onChange={handleChange}
-              name="date"
-              value={formData.date}
-            />
-          </div>
-
-          {formData.date && availableTimes.length > 0 && (
-            <div>
-              <h3 className="text-gray-700 font-semibold text-lg">Select Time</h3>
-              <div className="grid grid-cols-2 gap-4 mt-4">
-              
-                {availableTimes.map((time) => {
-                  const isSelected = formData.time === time;
-
-                  return (
-                    <button
-                      key={time}
-                      type="button"
-                      onClick={() => handleTimeSelect(time)}
-                      className={`p-3 rounded-xl border-2 text-center transition-all
-                        ${isSelected ? "border-blue-500 bg-blue-50/20" :
-                          "border-gray-300 hover:border-blue-300 cursor-pointer"
-                        }`}
-                    >
-                      {time}
-                    </button>
-                  );
-                })}
+                ))}
               </div>
             </div>
-          )}
-        </div>
 
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-4 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 group overflow-hidden relative"
-        >
-          <span className="relative z-10">Secure Your Spot</span>
-          <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-20 transition-opacity" />
-        </button>
-      </form>
+            {/* Name Input */}
+            <div className="relative group">
+              <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-charcoal" />
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="w-full pl-10 pr-4 py-3 bg-background rounded-lg border focus:outline-none focus:ring-2 focus:ring-secondary text-charcoal placeholder-charcoal"
+                required
+                onChange={handleChange}
+                name="name"
+                value={formData.name}
+                readOnly
+              />
+            </div>
 
-      {message && (
-        <div className={`mt-6 p-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
-          {success ? (
-            <FiCheckCircle className="text-green-500 text-xl flex-shrink-0" />
-          ) : (
-            <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
-          )}
-          <p className={`text-sm ${success ? 'text-green-500' : 'text-red-500'}`}>
-            {message}
-          </p>
-        </div>
-      )}
+            {/* Email Input */}
+            <div className="relative group">
+              <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-charcoal" />
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="w-full pl-10 pr-4 py-3 bg-background rounded-lg border focus:outline-none focus:ring-2 focus:ring-secondary text-charcoal placeholder-charcoal"
+                required
+                onChange={handleChange}
+                name="email"
+                value={formData.email}
+                readOnly
+              />
+            </div>
 
-    </div>
-    <BookedAppointments />
-   </>
+            <div className="relative group">
+              <select
+                name="species"
+                value={formData.species}
+                onChange={handleChange}
+                required
+                className="w-full pl-4 pr-4 py-3 bg-background rounded-lg border focus:outline-none focus:ring-2 focus:ring-secondary text-charcoal"
+              >
+                <option value="" disabled>Select Species</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+                <option value="Rabbit">Rabbit</option>
+                <option value="Hamster">Hamster</option>
+                <option value="Turtle">Turtle</option>
+                <option value="Fish">Fish</option>
+              </select>
+            </div>
+
+            <div className="relative group">
+              <FiCalendar className="absolute left-4 top-1/2 -translate-y-1/2 text-charcoal" />
+              <input
+                type="date"
+                className="w-full pl-10 pr-4 py-3 bg-background rounded-lg border focus:outline-none focus:ring-2 focus:ring-secondary text-charcoal placeholder-charcoal"
+                required
+                onChange={handleChange}
+                name="date"
+                value={formData.date}
+              />
+            </div>
+
+            {formData.date && availableTimes.length > 0 && (
+              <div>
+                <h3 className="text-charcoal font-semibold text-lg">Select Time</h3>
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  {availableTimes.map((time) => {
+                    const isSelected = formData.time === time;
+                    return (
+                      <button
+                        key={time}
+                        type="button"
+                        onClick={() => handleTimeSelect(time)}
+                        className={`p-3 rounded-xl border-2 text-center transition-all ${
+                          isSelected ? "border-secondary bg-blue-50/20" : "border-gray-300 hover:border-secondary"
+                        }`}
+                      >
+                        {time}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-secondary hover:bg-hovered py-4 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 group overflow-hidden relative"
+          >
+            <span className="relative z-10">Secure Your Spot</span>
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-20 transition-opacity" />
+          </button>
+        </form>
+
+        {message && (
+          <div className={`mt-6 p-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+            {success ? (
+              <FiCheckCircle className="text-green-500 text-xl flex-shrink-0" />
+            ) : (
+              <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
+            )}
+            <p className={`text-sm ${success ? 'text-green-500' : 'text-red-500'}`}>
+              {message}
+            </p>
+          </div>
+        )}
+      </div>
+
+      <BookedAppointments />
+    </>
   );
 };
 

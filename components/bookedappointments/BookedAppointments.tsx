@@ -42,13 +42,16 @@ const BookedAppointments = () => {
     const options: Intl.DateTimeFormatOptions = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
+  const handleCancelAppointment = async(appointmentId: string) =>{
+
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-20">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-20">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Your Appointments</h1>
-          <Link href="/" className="flex items-center text-blue-600 hover:text-blue-800">
+          <Link href="/" className="flex items-center text-secondary hover:text-hovered">
             <RiArrowGoBackLine className="mr-2" /> Back to Home
           </Link>
         </div>
@@ -56,7 +59,7 @@ const BookedAppointments = () => {
         {appointments.length > 0 ? (
           <div className="space-y-6">
             {appointments.map((appointment) => (
-              <div key={appointment.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6">
+              <div key={appointment.id} className="bg-light rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Service Section */}
                   <div className="flex items-center space-x-3">
@@ -96,7 +99,7 @@ const BookedAppointments = () => {
 
                 {/* Action Buttons */}
                 <div className="mt-4 pt-4 border-t border-gray-100 flex space-x-4 justify-end">
-                  <button className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition-colors">
+                  <button className="px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-md transition-colors" onClick={() => handleCancelAppointment(appointment.id)}>
                     Cancel Appointment
                   </button>
                   <button className="px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-md transition-colors">

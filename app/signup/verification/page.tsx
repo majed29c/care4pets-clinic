@@ -99,12 +99,12 @@ const Page = () => {
 
   return (
     <div className="flex w-full justify-center items-center">
-      <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[90vw] md:w-[65vw] lg:w-[50vw] border border-white/20 mt-[4vw]">
+      <div className="relative bg-light backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[90vw] md:w-[65vw] lg:w-[50vw] border border-white/20 mt-[4vw]">
         <div className="text-center mb-8">
-          <h2 className="text-xl md:text-[65vw] lg:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 mb-2">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary mb-2">
             Reset Password
           </h2>
-          <p className="text-gray-800">Please enter your 6-digit verification code</p>
+          <p className="text-charcoal">Please enter your 6-digit verification code</p>
 
           {message && !success && (
             <p className="text-red-500 text-sm text-center">{message}</p>
@@ -132,7 +132,7 @@ const Page = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-gray-200 backdrop-blur-sm rounded-md border-gray-700  lg:rounded-xl border-2 lg:border-white/30 focus:border-blue-400 focus:ring-2 outline-none transition-all text-gray-700 font-bold"
+                    className="w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-background backdrop-blur-sm rounded-md border-secondary  lg:rounded-xl border-2 lg:border-secondary focus:border-secondary focus:ring-2 outline-none transition-all text-charcoal font-bold"
                     autoFocus={index === 0}
                     aria-label={`Digit input ${index + 1}`}
                   />
@@ -142,7 +142,7 @@ const Page = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r mt-6 from-blue-500 to-purple-600 py-3 rounded-lg font-semibold text-white hover:shadow-lg transition-shadow transform hover:scale-[1.01] disabled:opacity-60"
+              className="w-full bg-secondary hover:bg-hovered mt-6  py-3 rounded-lg font-semibold text-white hover:shadow-lg transition-shadow transform hover:scale-[1.01] disabled:opacity-60"
               onClick={() => handleSubmit()}
               disabled={submitting}
             >
