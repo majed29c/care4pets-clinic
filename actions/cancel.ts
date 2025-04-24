@@ -2,7 +2,7 @@
 import {db} from "@/lib/firebase";
 import {collection, deleteDoc, doc, query} from "firebase/firestore";
 import { getDoc, where } from "firebase/firestore";
-export async function cancelAppointment(appointmentId: string) {
+export default async function cancelAppointment(appointmentId: string) {
     const appointmentRef = collection(db, "appointments");
 
     try{

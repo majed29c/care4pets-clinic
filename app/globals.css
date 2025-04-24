@@ -44,9 +44,3 @@ html, body {
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
-
-:root {
-  --color-text: #212121;
-  --color-secondary: #19297C;
-  --color-accent: #FFB88C;
-}
