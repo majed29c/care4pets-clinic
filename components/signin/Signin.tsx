@@ -30,6 +30,7 @@ const Signin = () => {
       setSuccess(true);
       cookie.set("email", formData.email, { expires: 1 });
       cookie.set("isLoggedIn",'true', { expires: 1 });
+      window.location.reload();
       window.location.href = "/";
     } else {
       setMessage("Invalid credentials");

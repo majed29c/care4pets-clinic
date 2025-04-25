@@ -8,10 +8,10 @@ const Footer = () => {
           {/* About Section */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold bg-clip-text text-light">
-              PetCare Clinic
+              Care4Pets Clinic
             </h3>
             <p className="text-gray-300 text-sm">
-              Providing compassionate care for your beloved pets since 2010. 
+              Providing compassionate care for your beloved pets since 2022. 
               Trusted by thousands of pet owners in the community.
             </p>
             <div className="flex space-x-4">
@@ -33,7 +33,6 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link href="about" className="text-gray-300 hover:text-blue-400 transition">About Us</Link></li>
               <li><Link href="#" className="text-gray-300 hover:text-blue-400 transition">Services</Link></li>
-              <li><Link href="#" className="text-gray-300 hover:text-blue-400 transition">Our Team</Link></li>
               <li><Link href="#" className="text-gray-300 hover:text-blue-400 transition">Emergency Care</Link></li>
               <li><Link href="#" className="text-gray-300 hover:text-blue-400 transition">Privacy Policy</Link></li>
             </ul>
@@ -45,20 +44,19 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <FaMapMarker className="text-" />
-                <span className="text-gray-300">123 Pet Care Street<br/>New York, NY 10001</span>
+                <span className="text-gray-300">Hamra Street<br/>Lebanon, Beirut</span>
               </div>
               <div className="flex items-center space-x-2">
                 <FaPhone className="text-background" />
-                <span className="text-gray-300">(555) 123-4567</span>
+                <span className="text-gray-300">01 234 567</span>
               </div>
               <div className="flex items-center space-x-2">
                 <FaEnvelope className="text-background" />
-                <span className="text-gray-300">contact@petcare.com</span>
+                <span className="text-gray-300">care4petsofficial@gmail.com</span>
               </div>
             </div>
           </div>
 
-          {/* Newsletter */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold">Stay Updated</h4>
             <p className="text-gray-300 text-sm">
@@ -83,7 +81,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-white/20 pt-8 text-center">
           <p className="text-gray-300 text-sm">
-            © 2025 PetCare Clinic. All rights reserved. 
+            © 2025 Care4Pets Clinic. All rights reserved. 
             <a href="#" className="hover:text-blue-400 ml-2">Terms of Service</a>
           </p>
         </div>

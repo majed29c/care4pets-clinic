@@ -147,10 +147,10 @@ const Page = () => {
         {/* Contact Footer */}
         <div className="mt-8 text-center space-y-2">
           <p className="text-sm text-charcoal/80">
-            🏥 24/7 Emergency Services | 📞 (555) 123-4567
+            🏥 24/7 Emergency Services | 📞 01 234 567
           </p>
           <p className="text-xs text-charcoal/60">
-            Serving your pets with care since 2010
+            Serving your pets with care since 2022
           </p>
         </div>
       </div>
