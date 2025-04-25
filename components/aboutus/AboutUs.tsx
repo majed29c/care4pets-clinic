@@ -87,7 +87,7 @@ const AboutUs = () => {
           </p>
           
           <div className="mt-8 text-center flex w-full justify-center items-center">  
-            <button className="mt-[4vw]  flex flex-row justify-center items-center bg-secondary text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
+            <button className="mt-[4vw]  flex flex-row justify-center items-center bg-secondary hover:bg-hovered text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
             <FaCalendarAlt className="mr-2" />
           Book Appointment
         </button>
