@@ -52,12 +52,6 @@ const Page = () => {
     }
   };
 
-  useEffect(() => {
-    if (digits.every((d) => d !== "") && !submitting) {
-      handleSubmit(digits);
-    }
-  }, [digits]);
-
   const handleSubmit = async (inputDigits?: string[]) => {
     const currentDigits = inputDigits || digits;
 
@@ -84,7 +78,9 @@ const Page = () => {
         setMessage(data.message);
         setSuccess(true);
         cookie.set("isLoggedIn", "true", { expires: 1 });
-        setTimeout(() => redirect("/"), 2000);
+        setTimeout(() => {
+          redirect("/");
+        }, 2000);
       } else {
         setMessage(data.message);
         setSuccess(false);
@@ -106,11 +102,14 @@ const Page = () => {
           </h2>
           <p className="text-charcoal">Please enter your 6-digit verification code</p>
 
-          {message && !success && (
-            <p className="text-red-500 text-sm text-center">{message}</p>
-          )}
-          {message && success && (
-            <p className="text-green-500 text-sm text-center">{message}</p>
+          {message && (
+            <p
+              className={`text-sm text-center ${
+                success ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {message}
+            </p>
           )}
 
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
