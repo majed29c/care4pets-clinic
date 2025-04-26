@@ -58,13 +58,7 @@ const Sidebar = (props: SidebarProps) => {
       <button className="flex absolute top-2 right-2 z-20" onClick={handleClose}>
         <X size={isSmall ? 15 : 24} />
       </button>
-     {isLoggedIn && (
-      <button onClick={closeMenu}>
-        <Link href="/profile" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
-          <RiUserLine size={isSmall ? 15 : 24} />
-          <span>Profile</span>
-        </Link>
-      </button>)}
+     
 
       <button onClick={closeMenu}>
         <Link href="/" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">

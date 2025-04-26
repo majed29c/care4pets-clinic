@@ -110,8 +110,7 @@ const Appointment = () => {
         setSuccess(true);
         setTimeout(() => {
           window.location.reload();
-          window.scrollTo(0, 0);
-        }, 500);
+        }, 1000);
       }
     } catch (error) {
       console.error("Error booking appointment:", error);
@@ -119,10 +118,25 @@ const Appointment = () => {
       setSuccess(false);
     }
   };
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  }
 
   return (
     <>
       <div className="relative bg-light backdrop-blur-2xl rounded-2xl shadow-2xl p-8 w-[90vw] sm:w-[70vw] lg:w-[80vw] mx-auto mt-8 transition-all duration-300 hover:shadow-3xl">
+      {message && (
+              <div className={`mb-4 p-4 pb-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-background' : 'bg-red-500/20'}`}>
+                {success ? (
+                  <FiCheckCircle className="text-secondary text-xl flex-shrink-0" />
+                ) : (
+                  <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
+                )}
+                <p className={`text-sm ${success ? 'text-secondary' : 'text-red-500'}`}>
+                  {message}
+                </p>
+              </div>
+       )}
         <div className="text-center mb-10">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary mb-4 animate-gradient">
             Schedule Your Session
@@ -217,6 +231,7 @@ const Appointment = () => {
                 onChange={handleChange}
                 name="date"
                 value={formData.date}
+                min={new Date().toISOString().split("T")[0]} // Restrict past dates
               />
             </div>
 
@@ -246,6 +261,7 @@ const Appointment = () => {
 
           <button
             type="submit"
+            onClick={scrollToTop}
             className="w-full bg-secondary hover:bg-hovered py-4 rounded-xl font-semibold text-white hover:shadow-lg transition-all transform hover:scale-[1.02] active:scale-95 group overflow-hidden relative"
           >
             <span className="relative z-10">Secure Your Spot</span>
@@ -253,18 +269,6 @@ const Appointment = () => {
           </button>
         </form>
 
-        {message && (
-          <div className={`mt-6 p-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
-            {success ? (
-              <FiCheckCircle className="text-green-500 text-xl flex-shrink-0" />
-            ) : (
-              <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
-            )}
-            <p className={`text-sm ${success ? 'text-green-500' : 'text-red-500'}`}>
-              {message}
-            </p>
-          </div>
-        )}
       </div>
 
       <BookedAppointments />

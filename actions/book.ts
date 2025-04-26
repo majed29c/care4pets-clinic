@@ -9,6 +9,7 @@ interface bookObject {
   date: string;
   time: string;
   service: string;
+  species: string;
 }
 
 export async function book(book: bookObject) {
@@ -25,6 +26,7 @@ export async function book(book: bookObject) {
       date: book.date,
       time: book.time,
       service: book.service,
+      species: book.species,
       createdAt: serverTimestamp(),
     });
 
