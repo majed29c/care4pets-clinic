@@ -88,7 +88,7 @@ const Sidebar = (props: SidebarProps) => {
       </button>
       
       <button onClick={closeMenu}>
-        <Link href="/appointments" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href={isLoggedIn ? '/appointments' : '/signin'} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiCalendarLine size={isSmall ? 15 : 24} />
           <span>Appointments</span>
         </Link>
