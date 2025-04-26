@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { verifysignup } from "@/actions/verifysignup";
 import { motion } from "framer-motion";
 import cookie from "js-cookie";
-
+import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 const Page = () => {
   const [digits, setDigits] = useState<string[]>(Array(6).fill(""));
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
@@ -102,15 +102,21 @@ const Page = () => {
           </h2>
           <p className="text-charcoal">Please enter your 6-digit verification code</p>
 
-          {message && (
-            <p
-              className={`text-sm text-center ${
-                success ? "text-green-500" : "text-red-500"
-              }`}
-            >
-              {message}
-            </p>
-          )}
+             {message && (
+                    <div className={`mt-6 p-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                      {success ? (
+                        <FiCheckCircle className="text-green-500 text-xl flex-shrink-0" />
+                      ) : (
+                        <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
+                      )}
+                      <p className={`text-sm ${success ? 'text-green-500' : 'text-red-500'}`}>
+                        {message}
+                      </p>
+                    </div>
+
+             )
+}
+
 
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
             <div className="flex justify-center space-x-3 lg:space-x-2 pt-20 pb-20 gap-0 lg:gap-3">
