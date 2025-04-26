@@ -59,7 +59,11 @@ const BookedAppointments = () => {
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
+const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   const handleCancelAppointment = async (appointmentId: string) => {
+    scrollToTop();
     const resp = await cancel(appointmentId);
     if (!resp) {
       console.log("Error cancelling appointment");

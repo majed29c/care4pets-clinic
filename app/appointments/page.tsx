@@ -98,6 +98,7 @@ const Appointment = () => {
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    scrollToTop();
     event.preventDefault();
     try {
       const resp = await book(formData);
@@ -118,8 +119,8 @@ const Appointment = () => {
       setSuccess(false);
     }
   };
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
+  const scrollToTop = () => { 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
