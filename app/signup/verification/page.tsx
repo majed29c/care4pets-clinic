@@ -135,7 +135,7 @@ const Page = () => {
                     ref={(el) => {
                       inputs.current[index] = el;
                     }}
-                    type="text"
+                    type="number"
                     maxLength={1}
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
