@@ -1,6 +1,17 @@
+'use client';
 import { FaClock, FaCalendarAlt, FaRegSadTear } from "react-icons/fa";
-
-const OpeningHours = () => {
+import Link from "next/link";
+import React from "react";    
+import { useEffect } from "react";
+import { useState } from "react";
+import cookies from "js-cookie";
+const OpeningHours = () => {    
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    if (cookies.get("isLoggedIn") === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
   return (
     <section className="w-full  py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,10 +80,12 @@ const OpeningHours = () => {
         </div>
 
         <div className="mt-8 text-center flex w-full justify-center items-center">  
+          <Link href={isLoggedIn ? "/appointments" : "/signin"}>
             <button className="mt-[4vw]  flex flex-row justify-center items-center bg-secondary hover:bg-hovered text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
             <FaCalendarAlt className="mr-2" />
           Book Appointment
         </button>
+        </Link>
           
         </div>
       </div>

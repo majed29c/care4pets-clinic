@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { RiHome2Line,RiUserLine, RiInformationLine, RiServiceLine, RiCalendarLine, RiGalleryLine, RiContactsLine, RiUserAddLine, RiLoginBoxLine } from 'react-icons/ri';
 import { X } from "lucide-react";
 import  cookies from 'js-cookie';
+import { redirect } from 'next/navigation';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -91,8 +92,11 @@ const Sidebar = (props: SidebarProps) => {
             {isLoggedIn && (  
       <button onClick={() => {
             cookies.remove('isLoggedIn');
+            cookies.remove('email');
             setIsLoggedIn(false);
             closeMenu();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            redirect('/');
           }}>
             <span className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
               <RiLoginBoxLine size={isSmall ? 15 : 24} />

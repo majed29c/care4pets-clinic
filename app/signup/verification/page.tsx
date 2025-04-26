@@ -11,6 +11,9 @@ const Page = () => {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   const handleChange = (index: number, value: string) => {
     if (/^\d$/.test(value)) {
@@ -41,6 +44,8 @@ const Page = () => {
 
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
+    handleScrollToTop();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const paste = e.clipboardData.getData("text").slice(0, 6);
     const newDigits = paste.split("").filter((c) => /\d/.test(c));
     const filledDigits = [...newDigits, ...Array(6 - newDigits.length).fill("")];
@@ -53,6 +58,7 @@ const Page = () => {
   };
 
   const handleSubmit = async (inputDigits?: string[]) => {
+    handleScrollToTop();
     const currentDigits = inputDigits || digits;
 
     if (submitting) return;
@@ -96,26 +102,24 @@ const Page = () => {
   return (
     <div className="flex w-full justify-center items-center">
       <div className="relative bg-light backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[90vw] md:w-[65vw] lg:w-[50vw] border border-white/20 mt-[4vw]">
+      {message && (
+              <div className={`mb-4 p-4 pb-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-background' : 'bg-red-500/20'}`}>
+                {success ? (
+                  <FiCheckCircle className="text-secondary text-xl flex-shrink-0" />
+                ) : (
+                  <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
+                )}
+                <p className={`text-sm ${success ? 'text-secondary' : 'text-red-500'}`}>
+                  {message}
+                </p>
+              </div>
+       )}
+
         <div className="text-center mb-8">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary mb-2">
             Reset Password
           </h2>
           <p className="text-charcoal">Please enter your 6-digit verification code</p>
-
-             {message && (
-                    <div className={`mt-6 p-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
-                      {success ? (
-                        <FiCheckCircle className="text-green-500 text-xl flex-shrink-0" />
-                      ) : (
-                        <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
-                      )}
-                      <p className={`text-sm ${success ? 'text-green-500' : 'text-red-500'}`}>
-                        {message}
-                      </p>
-                    </div>
-
-             )
-}
 
 
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { createUser } from "@/actions/createUser";
 import { redirect } from "next/navigation";
 import cookie from "js-cookie";
-
+import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 export default function Signup() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
@@ -19,9 +19,13 @@ export default function Signup() {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    handleScrollToTop();
     const formDataObj = new FormData(event.currentTarget);
     const response = await createUser(formDataObj);
     const data = JSON.parse(response);
@@ -41,6 +45,19 @@ export default function Signup() {
 
   return (
     <div className="relative bg-light backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/20 w-[90vw] md:w-[65vw] xl:w-[50vw] mt-[4vw]">
+       {message && (
+                    <div className={`mb-4 p-4 pb-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-background' : 'bg-red-500/20'}`}>
+                      {success ? (
+                        <FiCheckCircle className="text-secondary text-xl flex-shrink-0" />
+                      ) : (
+                        <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
+                      )}
+                      <p className={`text-sm ${success ? 'text-secondary' : 'text-red-500'}`}>
+                        {message}
+                      </p>
+                    </div>
+             )}
+      
       <div className="text-center mb-8">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-secondary mb-2">
           Create Account
@@ -127,8 +144,6 @@ export default function Signup() {
         </Link>
       </p>
 
-      {message && success && <p className="mt-4 text-center text-green-400">{message}</p>}
-      {message && !success && <p className="mt-4 text-center text-red-500">{message}</p>}
     </div>
   );
 }

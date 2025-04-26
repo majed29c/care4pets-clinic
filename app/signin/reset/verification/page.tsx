@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { motion } from "framer-motion";
 import { verify } from "@/actions/verify";
 import cookie from "js-cookie";
-
+import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 const Page = () => {
   const [digits, setDigits] = useState<string[]>(Array(6).fill(""));
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
@@ -25,6 +25,10 @@ const Page = () => {
       }
     }
   };
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
 
   const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
     const newDigits = [...digits];
@@ -46,6 +50,7 @@ const Page = () => {
 
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
+    handleScrollToTop();
     const paste = e.clipboardData.getData("text").slice(0, 6);
     const newDigits = paste.split("").filter((c) => /\d/.test(c));
     const filled = [...newDigits, ...Array(6 - newDigits.length).fill("")];
@@ -70,8 +75,9 @@ const Page = () => {
   }, [digits]);
 
   const handleSubmit = async (inputDigits?: string[]) => {
+    handleScrollToTop();
     const currentDigits = inputDigits || digits;
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (submitting) return; // Prevent double submission
 
     const email = cookie.get("email");
@@ -111,6 +117,18 @@ const Page = () => {
   return (
     <div className="flex w-full justify-center items-center">
       <div className="relative bg-light backdrop-blur-lg rounded-2xl shadow-xl p-8 w-[90vw] md:w-[65vw]  lg:w-[50vw] border border-white/20 mt-[4vw]">
+      {message && (
+                        <div className={`mb-4 p-4 pb-4 rounded-xl flex items-center space-x-3 ${success ? 'bg-background' : 'bg-red-500/20'}`}>
+                          {success ? (
+                            <FiCheckCircle className="text-secondary text-xl flex-shrink-0" />
+                          ) : (
+                            <FiAlertCircle className="text-red-500 text-xl flex-shrink-0" />
+                          )}
+                          <p className={`text-sm ${success ? 'text-secondary' : 'text-red-500'}`}>
+                            {message}
+                          </p>
+                        </div>
+                 )}
         <div className="text-center mb-8">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-bold bg-clip-text text-secondary mb-2">
             Reset Password
@@ -118,12 +136,8 @@ const Page = () => {
           <p className="text-charcoal">
             Please enter your 6-digit verification code
           </p>
-          {message && !success && (
-            <p className="text-red-500 text-sm text-center mt-2">{message}</p>
-          )}
-          {message && success && (
-            <p className="text-green-500 text-sm text-center mt-2">{message}</p>
-          )}
+          
+          
 
           <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
             <div className="flex justify-center space-x-3 lg:space-x-2 pt-20 pb-20 gap-0 lg:gap-3">
