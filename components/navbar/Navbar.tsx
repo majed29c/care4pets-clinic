@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import Sidebar from "@/components/sidebar/Sidebar";
 import Cookies from "js-cookie";
 import user from "@/public/user.png";
+import  cookies from "js-cookie";
+import { redirect } from "next/navigation";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -58,6 +60,7 @@ const Navbar = () => {
     }
   }, []);
 
+
   return (
     <div className="w-full h-auto flex flex-row items-center bg-none shadow-none py-4 relative">
       <div className="flex justify-center items-center xl:ml-[4vw]">
@@ -89,10 +92,11 @@ const Navbar = () => {
             Services
           </Link>
           <Link
-            href="/appointments"
+            href={isLoggedIn ? "/appointments" : "/signin"}
             className="nav-link text-[1.5rem] lg:text-[1rem] xl:text-[1.3vw] font-roboto text-charcoal hover:text-gray-500"
           >
             Appointments
+            
           </Link>
         </div>
       )}
