@@ -106,7 +106,7 @@ const Signin = () => {
               <input type="checkbox" className="rounded focus:ring-secondary " />
               <span className="text-sm text-charcoal">Remember me</span>
             </label>
-            <Link href="/signin/reset" className="text-sm pl-3 text-secondary hover:text-hovered">
+            <Link href="/signin/reset" onClick={handleScrollToTop} className="text-sm pl-3 text-secondary hover:text-hovered">
               Forgot password?
             </Link>
           </div>

@@ -1,9 +1,35 @@
+'use client';
 import Image from "next/image";
 import Photo3 from "../../public/photo3.jpg";
 import Photo4 from "../../public/photo4.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
+import React from "react";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import { useState } from "react";
+import { redirect } from "next/navigation";
 const AboutUs = () => {
- 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  useEffect(() => {
+    if (Cookies.get("isLoggedIn") === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  const handleClick = () => {
+    if (isLoggedIn) {
+      handleScrollToTop();
+      redirect("/appointments");
+    } else {
+      handleScrollToTop
+      redirect("/signin");
+    }
+  }
+
+
   return (
       <div className="max-w-7xl mx-auto px-6 mt-[4vw] py-4 my-4">
         <div className="text-center">
@@ -87,7 +113,7 @@ const AboutUs = () => {
           </p>
           
           <div className="mt-8 text-center flex w-full justify-center items-center">  
-            <button className="mt-[4vw]  flex flex-row justify-center items-center bg-secondary hover:bg-hovered text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
+            <button onClick={handleClick} className="mt-[4vw]  flex flex-row justify-center items-center bg-secondary hover:bg-hovered text-white px-6 py-3 rounded-lg xs:text-sm lg:text-[1.3vw]  hover:from-purple-600 hover:to-blue-600 font-roboto transition-transform duration-300 hover:scale-110">
             <FaCalendarAlt className="mr-2" />
           Book Appointment
         </button>

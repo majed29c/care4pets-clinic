@@ -26,6 +26,9 @@ const Sidebar = (props: SidebarProps) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   const handleClose = () => {
     setIsClosed(true);
@@ -62,28 +65,28 @@ const Sidebar = (props: SidebarProps) => {
      
 
       <button onClick={closeMenu}>
-        <Link href="/" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href="/" onClick={handleScrollToTop} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiHome2Line size={isSmall ? 15 : 24} />
           <span>Home</span>
         </Link>
       </button>
       
       <button onClick={closeMenu}>
-        <Link href="/about" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href="/about" onClick={handleScrollToTop} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiInformationLine size={isSmall ? 15 : 24} />
           <span>About Us</span>
         </Link>
       </button>
       
       <button onClick={closeMenu}>
-        <Link href="/services" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href="/services" onClick={handleScrollToTop} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiServiceLine size={isSmall ? 15 : 24} />
           <span>Services</span>
         </Link>
       </button>
       
       <button onClick={closeMenu}>
-        <Link href={isLoggedIn ? '/appointments' : '/signin'} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href={isLoggedIn ? '/appointments' : '/signin'} onClick={handleScrollToTop} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiCalendarLine size={isSmall ? 15 : 24} />
           <span>Appointments</span>
         </Link>
@@ -110,13 +113,13 @@ const Sidebar = (props: SidebarProps) => {
        (
         <>
       <button onClick={closeMenu}>
-        <Link href="/signup" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href="/signup" onClick={handleScrollToTop} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiUserAddLine size={isSmall ? 15 : 24} />
           <span>Signup</span>
         </Link>
       </button>
       <button onClick={closeMenu}>
-        <Link href="/signin" className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
+        <Link href="/signin" onClick={handleScrollToTop} className="flex items-center text-[0.9rem] md:text-[1.5rem] space-x-3 hover:text-gray-200 transition-all duration-200">
           <RiLoginBoxLine size={isSmall ? 15 : 24} />
           <span>Login</span>
         </Link>

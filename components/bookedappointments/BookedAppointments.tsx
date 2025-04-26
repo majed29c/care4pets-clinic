@@ -77,13 +77,16 @@ const scrollToTop = () => {
       console.log("Error cancelling appointment", data.message);
     }
   };
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-20">
       <section className="max-w-4xl mx-auto">
         <header className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Your Appointments</h1>
-          <Link href="/" className="flex items-center text-secondary hover:text-hovered">
+          <Link href="/" onClick={handleScrollToTop} className="flex items-center text-secondary hover:text-hovered">
             <RiArrowGoBackLine className="mr-2" /> Back to Home
           </Link>
         </header>
@@ -164,6 +167,7 @@ const scrollToTop = () => {
             <div className="mt-6">
               <Link
                 href="/services"
+                onClick={handleScrollToTop}
                 className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-secondary hover:bg-hovered"
               >
                 Browse Services

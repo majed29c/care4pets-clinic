@@ -139,7 +139,7 @@ export default function Signup() {
 
       <p className="mt-8 text-center text-charcoal">
         Already have an account?{" "}
-        <Link href="/signin" className="text-secondary hover:text-hovered font-semibold">
+        <Link href="/signin" onClick={handleScrollToTop} className="text-secondary hover:text-hovered font-semibold">
           Log in
         </Link>
       </p>
