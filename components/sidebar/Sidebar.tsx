@@ -32,6 +32,7 @@ const Sidebar = (props: SidebarProps) => {
 
   const handleClose = () => {
     setIsClosed(true);
+    handleScrollToTop();
     setTimeout(() => {
       props.setIsOpen(false);
     }, 300); 
