@@ -158,7 +158,7 @@ const Page = () => {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-background backdrop-blur-sm rounded-md  lg:rounded-xl border-2 border-secondary focus:border-secondary focus:ring-2 outline-none transition-all text-charcoal font-bold"
+                    className="no-spinner w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 text-2xl lg:text-3xl text-center bg-background backdrop-blur-sm rounded-md  lg:rounded-xl border-2 border-secondary focus:border-secondary focus:ring-2 outline-none transition-all text-charcoal font-bold"
                     autoFocus={index === 0}
                     aria-label={`Digit input ${index + 1}`}
                   />

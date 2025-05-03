@@ -127,7 +127,7 @@ const Navbar = () => {
           />
           {showDropdown && (
             <div
-              className={`absolute top-16 right-0 bg-light shadow-lg rounded-lg p-4 w-48 transition-transform duration-300 transform ${dropdownAnimation}`}
+              className={`absolute z-50 top-16 right-0 bg-light shadow-lg rounded-lg p-4 w-48 transition-transform duration-300 transform ${dropdownAnimation}`}
             >
               <div className="flex justify-between items-center mb-2">
                 <span className="text-charcoal font-semibold">Menu</span>
