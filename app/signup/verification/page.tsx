@@ -85,8 +85,8 @@ const Page = () => {
         setSuccess(true);
         cookie.set("isLoggedIn", "true", { expires: 1 });
         setTimeout(() => {
-          redirect("/");
-        }, 2000);
+          window.location.href='/';
+        }, 1000);
       } else {
         setMessage(data.message);
         setSuccess(false);

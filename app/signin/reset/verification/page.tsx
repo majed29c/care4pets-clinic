@@ -103,7 +103,7 @@ const Page = () => {
         setMessage(data.message);
         setSuccess(true);
         cookie.set("isLoggedIn", "true", { expires: 1 });
-        setTimeout(() => redirect("/"), 2000);
+        setTimeout(() => window.location.href='/', 1000);
       } else {
         setMessage(data.message);
         setSuccess(false);
