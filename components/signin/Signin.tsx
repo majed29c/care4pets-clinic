@@ -37,8 +37,7 @@ const Signin = () => {
       cookie.set("email", formData.email, { expires: 1 });
       cookie.set("isLoggedIn", "true", { expires: 1 });
       setTimeout(() => {
-       
-        redirect("/");
+        window.location.href = "/";
       }, 1000);
     } else {
       setMessage("Invalid credentials");
